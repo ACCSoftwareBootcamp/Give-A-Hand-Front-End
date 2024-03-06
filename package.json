@@ -18,9 +18,11 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,css}": [
-      "npm run format",
+    "**/*.{js,jsx}": [
       "npm run lint"
+    ],
+    "**/*.{js,jsx,html,css}": [
+      "npm run format"
     ]
   },
   "dependencies": {
