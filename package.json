@@ -17,12 +17,15 @@
     }
   },
   "lint-staged": {
-    "*.{js, jsx,ts,tsx}": [
-      "eslint . --fix --ext js,jsx"
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
     ],
-    "*.{json,js,ts,jsx,tsx,html}": [
-      "prettier . --write --ignore-unknown"
+    "*.jsx": [
+      "eslint --fix",
+      "prettier --write"
     ]
+  }
   },
   "dependencies": {
     "react": "^18.2.0",
