@@ -11,11 +11,18 @@
     "prettier:fix": "prettier . --write --ignore-unknown",
     "preview": "vite preview"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js, jsx,ts,tsx}": [
-      "eslint . --fix --ext js,jsx"
+    "*.ts": [
+      "eslint . --fix --ext js,jsx",
+      "prettier . --write --ignore-unknown"
     ],
-    "*.{json,js,ts,jsx,tsx,html}": [
+    "*.tsx": [
+      "eslint . --fix --ext js,jsx",
       "prettier . --write --ignore-unknown"
     ]
   },
