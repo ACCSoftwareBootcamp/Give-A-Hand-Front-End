@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-  console.log(3);
+  console.log(4);
   return (
     <>
       <div>

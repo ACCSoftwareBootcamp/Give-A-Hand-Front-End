@@ -17,13 +17,11 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "eslint . --fix --ext js,jsx",
-      "prettier . --write --ignore-unknown"
+    "*.{js, jsx,ts,tsx}": [
+      "eslint --quiet --fix"
     ],
-    "*.tsx": [
-      "eslint . --fix --ext js,jsx",
-      "prettier . --write --ignore-unknown"
+    "*.{json,js,ts,jsx,tsx,html}": [
+      "prettier --write --ignore-unknown"
     ]
   },
   "dependencies": {
