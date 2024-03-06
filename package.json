@@ -16,10 +16,12 @@
       "pre-commit": "lint-staged"
     }
   },
-  "**/*.{js,jsx}": [
-    "npm run lint:fix",
-    "npm run prettier:fix"
-  ],
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npm run lint:fix",
+      "npm run prettier:fix"
+    ]
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
