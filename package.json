@@ -18,12 +18,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx}": [
-      "npm run lint"
-    ],
-    "**/*.{js,jsx,html,css,json}": [
-      "npm run format"
-    ]
+    "**/*.{js,jsx}": "npm run lint",
+    "**/*.{js,jsx,html,css,json}": "npm run format"
   },
   "dependencies": {
     "react": "^18.2.0",
