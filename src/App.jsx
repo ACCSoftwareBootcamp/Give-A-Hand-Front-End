@@ -1,9 +1,14 @@
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <>
-      <button className='btn btn-primary'>Test button</button>
+      <Header />
+
+      <div className='banner'></div>
+      <Footer />
     </>
   );
 }
