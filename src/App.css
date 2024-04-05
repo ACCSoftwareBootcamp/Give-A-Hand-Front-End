@@ -3,3 +3,38 @@
   /* width: 300px; */
   height: 100vh;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+img {
+  height: 8em;
+  box-shadow: 2px 2px black;
+}
+.card-body {
+  width: 18em;
+  height: 20em;
+  padding: 2em;
+  margin: 449px 15px;
+  box-shadow: 3px 5px #444;
+  background-color: rgb(127, 13, 233, 0.75);
+  color: #fff;
+}
+
+.container {
+  display: flex;
+}
+
+.btn {
+  margin: 25px 0;
+  background-color: #333;
+  border: #d79105 1px solid;
+  color: #d79105;
+}
+
+.btn:hover {
+  background-color: #d79105;
+  border: black 1px solid;
+  color: #333;
+}
