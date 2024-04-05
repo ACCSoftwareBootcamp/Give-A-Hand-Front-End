@@ -10,14 +10,14 @@
 }
 img {
   height: 8em;
-  box-shadow: 2px 2px black;
+  box-shadow: -2px 2px rgb(0, 0, 0, 0.85);
 }
 .card-body {
   width: 18em;
   height: 20em;
   padding: 2em;
   margin: 449px 15px;
-  box-shadow: 3px 5px #444;
+  box-shadow: -3px 3px rgb(68, 68, 68, 0.85);
   background-color: rgb(127, 13, 233, 0.75);
   color: #fff;
 }
@@ -27,7 +27,6 @@ img {
 }
 
 .btn {
-  margin: 25px 0;
   background-color: #333;
   border: #d79105 1px solid;
   color: #d79105;
