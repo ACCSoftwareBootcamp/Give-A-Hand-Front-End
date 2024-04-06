@@ -1,7 +1,7 @@
 const Cards = () => {
   return (
     <>
-      <div className='container'>
+      <div className='cardContainer'>
         <div className='card-body'>
           <img src='src/assets/landscaper.png' className='card-img-top' alt='PIC' />
           <h5 className='card-title'>Help with Lawn Care</h5>

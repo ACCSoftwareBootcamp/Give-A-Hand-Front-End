@@ -1,7 +1,6 @@
 .banner {
   background-image: url('../images/volunteers-team-supporting-disabled-humanitarian-material-assistance-community-helping-old-sick-people-donation-food-clothes-charity-vector-concept_176411-1828\ \(1\).avif');
-  /* width: 300px; */
-  height: 100vh;
+  height: 100vh auto;
 }
 
 * {
@@ -22,7 +21,7 @@ img {
   color: #fff;
 }
 
-.container {
+.cardContainer {
   display: flex;
 }
 
