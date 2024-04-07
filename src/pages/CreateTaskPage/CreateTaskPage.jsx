@@ -1,16 +1,10 @@
-// Importing necessary components and hooks from react
 import { SignedIn, useUser } from '@clerk/clerk-react';
 import { useState } from 'react';
 
-// NewBlog component for creating a new blog post
 function CreateTaskPage() {
-  // Using useState hook for managing local state for title, author, and description
   const [taskType, setTaskType] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
-  // const [userId, setUserid] = useState("");
-
-  // How do we incoporate authentication into our posts to the database?
 
   const { user } = useUser();
   // console.log(user);
@@ -19,7 +13,6 @@ function CreateTaskPage() {
   const handleSubmit = (event) => {
     // Preventing the default form submission behavior
     event.preventDefault();
-    //Creating a blogPost object with the form data and the user id
     const userRequest = { taskType, author, description, userId: user.id };
 
     fetch('http://localhost:3000/request', {
@@ -44,7 +37,6 @@ function CreateTaskPage() {
       <SignedIn>
         <div className='container'>
           <h1 className='text-center my-4'>Make A New Request</h1>
-          {/* The form for creating a new blog post */}
           <form onSubmit={handleSubmit}>
             <div className='mb-3'>
               <label htmlFor='requestType' className='form-label'>
