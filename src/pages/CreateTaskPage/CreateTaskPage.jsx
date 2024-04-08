@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function CreateTaskPage() {
   const [taskType, setTaskType] = useState('');
-  const [author, setAuthor] = useState('');
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const { user } = useUser();
@@ -13,7 +13,7 @@ function CreateTaskPage() {
   const handleSubmit = (event) => {
     // Preventing the default form submission behavior
     event.preventDefault();
-    const userRequest = { taskType, author, description, userId: user.id };
+    const userRequest = { taskType, name, description, userId: user.id };
 
     fetch('http://localhost:3000/request', {
       method: 'POST',
@@ -24,7 +24,7 @@ function CreateTaskPage() {
       .then((data) => {
         console.log('Success', data);
         setTaskType('');
-        setAuthor('');
+        setName('');
         setDescription('');
       })
       .catch((error) => {
@@ -53,15 +53,15 @@ function CreateTaskPage() {
               />
             </div>
             <div className='mb-3'>
-              <label htmlFor='author' className='form-label'>
+              <label htmlFor='name' className='form-label'>
                 Name:
               </label>
               <input
                 type='text'
                 className='form-control'
                 id='subject'
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder='Full Name'
                 required
               />
