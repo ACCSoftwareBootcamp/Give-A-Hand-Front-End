@@ -1,7 +1,6 @@
 .banner {
   background-image: url('../images/volunteers-team-supporting-disabled-humanitarian-material-assistance-community-helping-old-sick-people-donation-food-clothes-charity-vector-concept_176411-1828\ \(1\).avif');
-  /* width: 300px; */
-  height: 100vh;
+  height: 100vh auto;
 }
 
 * {
@@ -9,7 +8,7 @@
   padding: 0;
 }
 img {
-  height: 8em;
+  height: 10em;
   box-shadow: -2px 2px rgb(0, 0, 0, 0.85);
 }
 .card-body {
@@ -22,10 +21,12 @@ img {
   color: #fff;
 }
 
-.container {
+.cardContainer {
   display: flex;
 }
-
+.searchCardContainer {
+  display: flex;
+}
 .btn {
   background-color: #333;
   border: #d79105 1px solid;
@@ -36,4 +37,10 @@ img {
   background-color: #d79105;
   border: black 1px solid;
   color: #333;
+}
+.border {
+  margin: 5px;
+  border: #fff solid 2px;
+  border-radius: 5%;
+  box-shadow: 1px 1px;
 }
