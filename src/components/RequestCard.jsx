@@ -1,7 +1,6 @@
-import propTypes from 'props-types';
+import PropTypes from 'prop-types';
 
-const RequestCard = (props) => {
-  const { name, id, taskType, description } = props;
+const RequestCard = ({ name, id, taskType, description }) => {
   return (
     <div className='searchCardcontainer'>
       <div className='border' key={id}>
@@ -14,10 +13,10 @@ const RequestCard = (props) => {
 };
 
 RequestCard.propTypes = {
-  name: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
-  taskType: propTypes.string.isRequired,
-  description: propTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  taskType: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
 };
 
 export default RequestCard;
