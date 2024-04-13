@@ -1,4 +1,4 @@
-import { SignedIn, useUser } from '@clerk/clerk-react';
+import { SignedIn, useUser, SignedOut } from '@clerk/clerk-react';
 import { useState } from 'react';
 
 function CreateTaskPage() {
@@ -7,18 +7,14 @@ function CreateTaskPage() {
   const [description, setDescription] = useState('');
 
   const { user } = useUser();
-  // console.log(user);
 
-  // handleSubmit function for handling the form submission
   const handleSubmit = (event) => {
-    // Preventing the default form submission behavior
     event.preventDefault();
-    const userRequest = { taskType, name, description, userId: user.id };
-
-    fetch('http://localhost:3000/request', {
+    const userTask = { taskType, name, description, userId: user.id };
+    fetch('http://localhost:3000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userRequest)
+      body: JSON.stringify(userTask)
     })
       .then((res) => res.json())
       .then((data) => {
@@ -28,24 +24,57 @@ function CreateTaskPage() {
         setDescription('');
       })
       .catch((error) => {
-        console.log('Error Creating new Request: ', error);
+        console.log('Error Creating new Task: ', error);
       });
   };
 
   return (
     <>
+      <SignedOut>
+        <div id='carouselExample' className='carousel slide'>
+          <div className='carousel-inner'>
+            <div className='carousel-item active'>
+              <img src='...' className='d-block w-100' alt='...' />
+            </div>
+            <div className='carousel-item'>
+              <img src='...' className='d-block w-100' alt='...' />
+            </div>
+            <div className='carousel-item'>
+              <img src='...' className='d-block w-100' alt='...' />
+            </div>
+          </div>
+          <button
+            className='carousel-control-prev'
+            type='button'
+            data-bs-target='#carouselExample'
+            data-bs-slide='prev'
+          >
+            <span className='carousel-control-prev-icon' aria-hidden='true'></span>
+            <span className='visually-hidden'>Previous</span>
+          </button>
+          <button
+            className='carousel-control-next'
+            type='button'
+            data-bs-target='#carouselExample'
+            data-bs-slide='next'
+          >
+            <span className='carousel-control-next-icon' aria-hidden='true'></span>
+            <span className='visually-hidden'>Next</span>
+          </button>
+        </div>
+      </SignedOut>
       <SignedIn>
         <div className='container'>
-          <h1 className='text-center my-4'>Make A New Request</h1>
+          <h1 className='text-center my-4'>Having Trouble? Send out a Task</h1>
           <form onSubmit={handleSubmit}>
             <div className='mb-3'>
-              <label htmlFor='requestType' className='form-label'>
+              <label htmlFor='taskType' className='form-label'>
                 Type of Request:
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='requestType'
+                id='taskType'
                 value={taskType}
                 onChange={(e) => setTaskType(e.target.value)}
                 placeholder='Lawn Care, Ride Share, Handyman...'
