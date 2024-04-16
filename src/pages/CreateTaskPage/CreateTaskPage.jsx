@@ -1,4 +1,4 @@
-import { SignedIn, useUser, SignedOut } from '@clerk/clerk-react';
+import { useAuth } from '@clerk/clerk-react';
 import { useState } from 'react';
 
 function CreateTaskPage() {
@@ -6,11 +6,11 @@ function CreateTaskPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const { user } = useUser();
+  const { userId } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const userTask = { taskType, name, description, userId: user.id };
+    const userTask = { taskType, name, description, userId };
     fetch('http://localhost:3000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,91 +30,56 @@ function CreateTaskPage() {
 
   return (
     <>
-      <SignedOut>
-        <div id='carouselExample' className='carousel slide'>
-          <div className='carousel-inner'>
-            <div className='carousel-item active'>
-              <img src='...' className='d-block w-100' alt='...' />
-            </div>
-            <div className='carousel-item'>
-              <img src='...' className='d-block w-100' alt='...' />
-            </div>
-            <div className='carousel-item'>
-              <img src='...' className='d-block w-100' alt='...' />
-            </div>
+      <div className='container'>
+        <h1 className='text-center my-4'>Having Trouble? Send out a Task</h1>
+        <form onSubmit={handleSubmit}>
+          <div className='mb-3'>
+            <label htmlFor='taskType' className='form-label'>
+              Type of Request:
+            </label>
+            <input
+              type='text'
+              className='form-control'
+              id='taskType'
+              value={taskType}
+              onChange={(e) => setTaskType(e.target.value)}
+              placeholder='Lawn Care, Ride Share, Handyman...'
+              required
+            />
           </div>
-          <button
-            className='carousel-control-prev'
-            type='button'
-            data-bs-target='#carouselExample'
-            data-bs-slide='prev'
-          >
-            <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-            <span className='visually-hidden'>Previous</span>
+          <div className='mb-3'>
+            <label htmlFor='name' className='form-label'>
+              Name:
+            </label>
+            <input
+              type='text'
+              className='form-control'
+              id='subject'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder='Full Name'
+              required
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='description' className='form-label'>
+              Request:
+            </label>
+            <textarea
+              rows='3'
+              className='form-control'
+              id='description'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder='Limit: 3-300 Characters'
+              required
+            />
+          </div>
+          <button type='submit' className='btn btn-primary'>
+            Submit
           </button>
-          <button
-            className='carousel-control-next'
-            type='button'
-            data-bs-target='#carouselExample'
-            data-bs-slide='next'
-          >
-            <span className='carousel-control-next-icon' aria-hidden='true'></span>
-            <span className='visually-hidden'>Next</span>
-          </button>
-        </div>
-      </SignedOut>
-      <SignedIn>
-        <div className='container'>
-          <h1 className='text-center my-4'>Having Trouble? Send out a Task</h1>
-          <form onSubmit={handleSubmit}>
-            <div className='mb-3'>
-              <label htmlFor='taskType' className='form-label'>
-                Type of Request:
-              </label>
-              <input
-                type='text'
-                className='form-control'
-                id='taskType'
-                value={taskType}
-                onChange={(e) => setTaskType(e.target.value)}
-                placeholder='Lawn Care, Ride Share, Handyman...'
-                required
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor='name' className='form-label'>
-                Name:
-              </label>
-              <input
-                type='text'
-                className='form-control'
-                id='subject'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder='Full Name'
-                required
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor='description' className='form-label'>
-                Request:
-              </label>
-              <textarea
-                rows='3'
-                className='form-control'
-                id='description'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder='Limit: 3-300 Characters'
-                required
-              />
-            </div>
-            <button type='submit' className='btn btn-primary'>
-              Submit
-            </button>
-          </form>
-        </div>
-      </SignedIn>
+        </form>
+      </div>
     </>
   );
 }
