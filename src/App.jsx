@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import TasksPage from './pages/TasksPage/TasksPage.jsx';
 import CreateTaskPage from './pages/CreateTaskPage/CreateTaskPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
+import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 
 function App() {
   // const { userId, getToken } = useAuth();
@@ -16,8 +17,10 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/tasks' element={<TasksPage />} />
         <Route path='/create-task' element={<CreateTaskPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
       </Routes>
       <div className='banner'></div>
+
       <Footer />
     </>
   );

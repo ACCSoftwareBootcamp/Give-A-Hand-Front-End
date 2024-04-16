@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
-import RequestCard from '../../components/RequestCard';
-import { useEffect } from 'react';
+import TaskCard from '../../components/TaskCard';
 
 const TasksPage = () => {
   const [taskType, setTaskType] = useState('');
@@ -9,9 +8,16 @@ const TasksPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  };
+    fetch('http://localhost:3000/task/:taskType')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Success', data);
+        setTasks(data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-  useEffect(() => {
     fetch('http://localhost:3000/task')
       .then((res) => res.json())
       .then((data) => {
@@ -21,8 +27,7 @@ const TasksPage = () => {
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
-  }, []);
-
+  };
   return (
     <>
       <SignedOut>
@@ -45,14 +50,14 @@ const TasksPage = () => {
               Search
             </button>
           </form>
-          <div>
+          <div className='col-md-12'>
             {!tasks ? (
               <p>Loading...</p>
             ) : (
               tasks.map((task) => {
                 return (
-                  <div className='col-md-4' key={task._id}>
-                    <RequestCard
+                  <div className='col-md-3 taskCard-display' key={task._id}>
+                    <TaskCard
                       id={task._id}
                       name={task.name}
                       description={task.description}

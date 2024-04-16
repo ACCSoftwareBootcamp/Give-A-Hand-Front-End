@@ -1,5 +1,8 @@
 import { SignedIn, useUser, SignedOut } from '@clerk/clerk-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import '../../App.css';
 
 function CreateTaskPage() {
   const [taskType, setTaskType] = useState('');
@@ -7,6 +10,7 @@ function CreateTaskPage() {
   const [description, setDescription] = useState('');
 
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +23,7 @@ function CreateTaskPage() {
       .then((res) => res.json())
       .then((data) => {
         console.log('Success', data);
+        navigate('/profile');
         setTaskType('');
         setName('');
         setDescription('');
@@ -34,13 +39,18 @@ function CreateTaskPage() {
         <div id='carouselExample' className='carousel slide'>
           <div className='carousel-inner'>
             <div className='carousel-item active'>
-              <img src='...' className='d-block w-100' alt='...' />
+              <img src='' className='d-block w-100' alt='Pic' />
+              <div className='carousel-caption top-0 mt-4'>
+                <p className='mt-5 fs-3 text-uppercase'>
+                  Looking for ways to help in your community
+                </p>
+              </div>
             </div>
             <div className='carousel-item'>
-              <img src='...' className='d-block w-100' alt='...' />
+              <img src='' className='d-block w-100' alt='pic' />
             </div>
             <div className='carousel-item'>
-              <img src='...' className='d-block w-100' alt='...' />
+              <img src='' className='d-block w-100' alt='pic' />
             </div>
           </div>
           <button

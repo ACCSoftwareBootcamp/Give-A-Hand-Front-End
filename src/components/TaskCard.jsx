@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
 
-const RequestCard = ({ name, id, taskType, description }) => {
+const TaskCard = ({ name, id, taskType, description }) => {
   return (
     <div className='searchCardcontainer'>
-      <div className='border' key={id}>
-        <h4>{name}</h4>
-        <p>{taskType}</p>
+      <div className='border taskCard' key={id}>
+        <h4>{taskType}</h4>
+        <p>{name}</p>
         <p>{description}</p>
       </div>
     </div>
   );
 };
 
-RequestCard.propTypes = {
+TaskCard.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   taskType: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
 };
 
-export default RequestCard;
+export default TaskCard;
