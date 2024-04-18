@@ -36,41 +36,8 @@ function CreateTaskPage() {
   return (
     <>
       <SignedOut>
-        <div id='carouselExample' className='carousel slide'>
-          <div className='carousel-inner'>
-            <div className='carousel-item active'>
-              <img src='' className='d-block w-100' alt='Pic' />
-              <div className='carousel-caption top-0 mt-4'>
-                <p className='mt-5 fs-3 text-uppercase'>
-                  Looking for ways to help in your community
-                </p>
-              </div>
-            </div>
-            <div className='carousel-item'>
-              <img src='' className='d-block w-100' alt='pic' />
-            </div>
-            <div className='carousel-item'>
-              <img src='' className='d-block w-100' alt='pic' />
-            </div>
-          </div>
-          <button
-            className='carousel-control-prev'
-            type='button'
-            data-bs-target='#carouselExample'
-            data-bs-slide='prev'
-          >
-            <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-            <span className='visually-hidden'>Previous</span>
-          </button>
-          <button
-            className='carousel-control-next'
-            type='button'
-            data-bs-target='#carouselExample'
-            data-bs-slide='next'
-          >
-            <span className='carousel-control-next-icon' aria-hidden='true'></span>
-            <span className='visually-hidden'>Next</span>
-          </button>
+        <div>
+          <h1>Please Sign-In to send a Task</h1>
         </div>
       </SignedOut>
       <SignedIn>
@@ -81,15 +48,20 @@ function CreateTaskPage() {
               <label htmlFor='taskType' className='form-label'>
                 Type of Request:
               </label>
-              <input
-                type='text'
-                className='form-control'
+              <select
                 id='taskType'
+                className='form-control'
+                name='taskType'
                 value={taskType}
-                onChange={(e) => setTaskType(e.target.value)}
-                placeholder='Lawn Care, Ride Share, Handyman...'
+                onChange={(event) => setTaskType(event.target.value)}
+                size='1'
                 required
-              />
+              >
+                <option value='LawnCare'>Lawn Care</option>
+                <option value='Handyman'>Handyman</option>
+                <option value='RideShare'>Ride Share</option>
+                <option value='Other'>Other..</option>
+              </select>
             </div>
             <div className='mb-3'>
               <label htmlFor='name' className='form-label'>
