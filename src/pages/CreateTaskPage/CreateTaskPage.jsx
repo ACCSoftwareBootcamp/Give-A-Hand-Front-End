@@ -1,4 +1,4 @@
-import { SignedIn, useUser, SignedOut } from '@clerk/clerk-react';
+import { useAuth } from '@clerk/clerk-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,10 +11,11 @@ function CreateTaskPage() {
 
   const { user } = useUser();
   const navigate = useNavigate();
+  const { userId } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const userTask = { taskType, name, description, userId: user.id };
+    const userTask = { taskType, name, description, userId };
     fetch('http://localhost:3000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import TaskCard from '../../components/TaskCard';
 
@@ -21,7 +21,6 @@ const TasksPage = () => {
     fetch('http://localhost:3000/task')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Success', data);
         setTasks(data.results);
       })
       .catch((error) => {

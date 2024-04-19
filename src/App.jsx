@@ -6,18 +6,19 @@ import TasksPage from './pages/TasksPage/TasksPage.jsx';
 import CreateTaskPage from './pages/CreateTaskPage/CreateTaskPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
+import PrivateRoutes from './components/PrivateRoutes.jsx';
 
 function App() {
-  // const { userId, getToken } = useAuth();
-
   return (
     <>
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/tasks' element={<TasksPage />} />
-        <Route path='/create-task' element={<CreateTaskPage />} />
         <Route path='/profile' element={<ProfilePage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path='/tasks' element={<TasksPage />} />
+          <Route path='/create-task' element={<CreateTaskPage />} />
+        </Route>
       </Routes>
       <div className='banner'></div>
 
