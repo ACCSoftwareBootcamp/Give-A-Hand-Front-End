@@ -20,7 +20,6 @@ const TasksPage = () => {
       .then((res) => res.json())
       .then((data) => {
         const { docs, ...fetchResponse } = data;
-        console.log(docs);
         setTasks(docs);
         setFetchResponse(fetchResponse);
       })
@@ -29,7 +28,7 @@ const TasksPage = () => {
       });
 
     searchClick && setSearchClick(false);
-  });
+  }, []);
 
   const handleSearchClick = () => {
     setPage(1);
@@ -82,16 +81,18 @@ const TasksPage = () => {
       {!tasks ? (
         <p>Loading...</p>
       ) : (
-        <div className='tasks-container'>
-          {tasks.map((task) => (
-            <RequestCard
-              key={task._id}
-              id={task._id}
-              name={task.name}
-              description={task.description}
-              taskType={task.taskType}
-            />
-          ))}
+        <div>
+          <div className='tasks-container'>
+            {tasks.map((task) => (
+              <RequestCard
+                key={task._id}
+                id={task._id}
+                name={task.name}
+                description={task.description}
+                taskType={task.taskType}
+              />
+            ))}
+          </div>
           {fetchResponse.hasNextPage && (
             <div className='text-center'>
               <button className='btn btn-outline-primary' onClick={handlePageChange}>
