@@ -1,29 +1,71 @@
 import { useState } from 'react';
 import RequestCard from '../../components/RequestCard';
 import { useEffect } from 'react';
+import './TasksPage.scss';
 
 const TasksPage = () => {
-  const [taskType, setTaskType] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [fetchResponse, setFetchResponse] = useState({});
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchClick, setSearchClick] = useState(false);
+  const limit = 3;
+  // let page = 1;
 
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
   useEffect(() => {
-    fetch('http://localhost:3000/task')
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {
-        setTasks(data.results);
+        const { docs, ...fetchResponse } = data;
+        console.log(docs);
+        setTasks(docs);
+        setFetchResponse(fetchResponse);
       })
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
-  }, []);
+
+    searchClick && setSearchClick(false);
+  });
+
+  const handleSearchClick = () => {
+    setPage(1);
+    // page = 1;
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { docs, ...fetchResponse } = data;
+        setTasks(docs);
+        setFetchResponse(fetchResponse);
+      })
+      .catch((error) => {
+        console.log('Error searching for Request: ', error);
+      });
+  };
+
+  const handlePageChange = () => {
+    setPage((prevPage) => prevPage + 1);
+    console.log(page);
+    // page += 1;
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { docs, ...fetchResponse } = data;
+        setTasks([...tasks, ...docs]);
+        console.log(docs);
+        setFetchResponse(fetchResponse);
+      })
+      .catch((error) => {
+        console.log('Error searching for Request: ', error);
+      });
+  };
 
   return (
-    <div className='container'>
-      <h1 className='text-center my-4'>Search For A Request</h1>
+    <div className='tasks-section container'>
+      <h2 className='tasks-title text-center'>Search For A Request</h2>
       <form onSubmit={handleSubmit} className='d-flex' role='search'>
         <input
           id='searchBar'
@@ -31,31 +73,34 @@ const TasksPage = () => {
           type='search'
           placeholder='Search'
           aria-label='Search'
-          value={taskType}
-          onChange={(e) => setTaskType(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className='btn' type='submit'>
+        <button className='btn btn-outline-primary' type='submit' onClick={handleSearchClick}>
           Search
         </button>
       </form>
-      <div>
-        {!tasks ? (
-          <p>Loading...</p>
-        ) : (
-          tasks.map((task) => {
-            return (
-              <div className='col-md-4' key={task._id}>
-                <RequestCard
-                  id={task._id}
-                  name={task.name}
-                  description={task.description}
-                  taskType={task.taskType}
-                />
-              </div>
-            );
-          })
-        )}
-      </div>
+      {!tasks ? (
+        <p>Loading...</p>
+      ) : (
+        <div className='tasks-container'>
+          {tasks.map((task) => (
+            <RequestCard
+              key={task._id}
+              id={task._id}
+              name={task.name}
+              description={task.description}
+              taskType={task.taskType}
+            />
+          ))}
+          {fetchResponse.hasNextPage && (
+            <div className='text-center'>
+              <button className='btn btn-outline-primary' onClick={handlePageChange}>
+                Load More
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

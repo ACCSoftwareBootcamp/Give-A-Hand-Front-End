@@ -10,7 +10,7 @@ function CreateTaskPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const userTask = { taskType, name, description, userId };
+    const userTask = { taskType, name, description, authorId: userId };
     fetch('http://localhost:3000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,7 +30,7 @@ function CreateTaskPage() {
 
   return (
     <>
-      <div className='container'>
+      <div className='container mb-5'>
         <h1 className='text-center my-4'>Having Trouble? Send out a Task</h1>
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
