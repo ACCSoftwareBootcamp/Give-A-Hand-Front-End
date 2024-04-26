@@ -8,9 +8,7 @@ const TasksPage = () => {
   const [fetchResponse, setFetchResponse] = useState({});
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchClick, setSearchClick] = useState(false);
   const limit = 3;
-  // let page = 1;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +17,7 @@ const TasksPage = () => {
     fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {
+        // Split data and response from server
         const { docs, ...fetchResponse } = data;
         setTasks(docs);
         setFetchResponse(fetchResponse);
@@ -26,8 +25,6 @@ const TasksPage = () => {
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
-
-    searchClick && setSearchClick(false);
   }, []);
 
   const handleSearchClick = () => {

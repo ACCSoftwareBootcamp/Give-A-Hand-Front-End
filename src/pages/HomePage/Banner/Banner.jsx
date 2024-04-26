@@ -1,4 +1,5 @@
 import './Banner.scss';
+import { NavLink } from 'react-router-dom';
 
 function Banner() {
   return (
@@ -18,9 +19,9 @@ function Banner() {
               lawn, getting groceries for those unable to, or even rescuing someone with a busted
               tire on the side of a highway. You become the hero your city needs!
             </p>
-            <button type='button' className='btn btn-outline-primary'>
+            <NavLink to='/about-us' className='btn btn-outline-primary'>
               Learn More
-            </button>
+            </NavLink>
           </div>
           <div className='text-center'>
             <iframe

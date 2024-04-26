@@ -37,12 +37,14 @@ function Header() {
                 Create Task
               </NavLink>
             </li>
-            <NavLink className='nav-link' to='/about'>
-              About Us
-            </NavLink>
             <li className='nav-item'>
               <NavLink className='nav-link' to='/user-tasks'>
-                Volunteers
+                Assignments
+              </NavLink>
+            </li>
+            <li className='nav-item'>
+              <NavLink className='nav-link' to='/about-us'>
+                About Us
               </NavLink>
             </li>
           </ul>
