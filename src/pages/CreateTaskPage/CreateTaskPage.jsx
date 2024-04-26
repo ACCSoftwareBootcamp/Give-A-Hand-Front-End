@@ -1,16 +1,20 @@
 import { useAuth } from '@clerk/clerk-react';
 import { useState } from 'react';
+import './CreateTaskPage.scss';
 
 function CreateTaskPage() {
   const [taskType, setTaskType] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [imageData, setImageData] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const { userId } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const userTask = { taskType, name, description, authorId: userId };
+    // Fetch Task Data
     fetch('http://localhost:3000/task', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,14 +22,42 @@ function CreateTaskPage() {
     })
       .then((res) => res.json())
       .then((data) => {
+        postImage(data.sentTask._id);
         console.log('Success', data);
-        setTaskType('');
-        setName('');
-        setDescription('');
       })
       .catch((error) => {
         console.log('Error Creating new Task: ', error);
       });
+
+    // Fetch Image Task
+    const postImage = (taskId) => {
+      fetch(`http://localhost:3000/task-image/${taskId}`, {
+        method: 'POST',
+        body: imageData
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('Success', data);
+          setTaskType('');
+          setName('');
+          setDescription('');
+          setImageData('');
+          // Reset input value
+          document.getElementById('image-upload').value = '';
+        })
+        .catch((error) => {
+          console.log('Error Creating new Task: ', error);
+        });
+    };
+  };
+
+  const handleImageUpload = (event) => {
+    const image = event.target.files[0];
+    const imageUrl = URL.createObjectURL(image);
+    const imageData = new FormData();
+    imageData.append('image', image);
+    setImageData(imageData);
+    setImageUrl(imageUrl);
   };
 
   return (
@@ -75,7 +107,20 @@ function CreateTaskPage() {
               required
             />
           </div>
-          <button type='submit' className='btn btn-primary'>
+          <div className='mb-3'>
+            <label className='d-block mb-3' htmlFor='image-upload'>
+              Upload Image
+            </label>
+            <input
+              id='image-upload'
+              type='file'
+              accept='image/*'
+              required
+              onChange={(event) => handleImageUpload(event)}
+            />
+            {imageData && <img className='image-upload' src={imageUrl} alt='uploaded image' />}
+          </div>
+          <button type='submit' className='btn btn-primary mt-3'>
             Submit
           </button>
         </form>

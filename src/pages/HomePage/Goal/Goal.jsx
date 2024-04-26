@@ -2,6 +2,7 @@ import './Goal.scss';
 import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import { NavLink } from 'react-router-dom';
 
 function Goal() {
   const [init, setInit] = useState(false);
@@ -109,9 +110,9 @@ function Goal() {
               kindness, facilitated by the &quot;Give a Hand&quot; app&apos;s incentivization and
               motivation features.
             </p>
-            <a href='#' className='card-link text-primary'>
+            <NavLink className='card-link text-primary' to='/about-us'>
               Learn more
-            </a>
+            </NavLink>
           </div>
         </div>
         <div className='card'>
@@ -122,9 +123,9 @@ function Goal() {
               opportunities for users to perform good deeds and earn rewards, ultimately
               strengthening community bonds and enriching lives.
             </p>
-            <a href='#' className='card-link text-primary'>
+            <NavLink className='card-link text-primary' to='/about-us'>
               Learn more
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>

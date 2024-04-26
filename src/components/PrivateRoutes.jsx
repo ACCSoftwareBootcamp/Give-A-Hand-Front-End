@@ -3,8 +3,12 @@ import { useAuth } from '@clerk/clerk-react';
 
 const PrivateRoutes = () => {
   const { isSignedIn } = useAuth();
+  if (isSignedIn) {
+    return <Outlet />;
+  }
 
-  return isSignedIn ? <Outlet /> : <Navigate to='/' />;
+  // alert('Please login first');
+  return <Navigate to='/' />;
 };
 
 export default PrivateRoutes;

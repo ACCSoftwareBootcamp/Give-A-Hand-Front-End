@@ -25,7 +25,7 @@ const UserTasksPage = () => {
     }
 
     fetchTasks();
-  });
+  }, []);
 
   return (
     <div className='tasks-section container'>
@@ -37,6 +37,7 @@ const UserTasksPage = () => {
           {tasks &&
             tasks.map((task) => (
               <RequestCard
+                imageUrl={task.imageUrl}
                 userTasksPage={true}
                 key={task._id}
                 name={task.name}

@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import { useAuth } from '@clerk/clerk-react';
 import { useState } from 'react';
 
-const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
-  const { getToken, userId } = useAuth();
+const RequestCard = ({ id, name, taskType, description, userTasksPage, imageUrl }) => {
+  const { getToken } = useAuth();
   const [added, setAdded] = useState(false);
 
   const handleAddClick = async () => {
     const token = await getToken();
-    console.log({ token, userId });
 
     try {
       const request = await fetch(`http://localhost:3000/task/${id}`, {
@@ -16,7 +15,6 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await request.json();
-      console.log(data);
       if (data?.message == 'Success') {
         setAdded(true);
       }
@@ -27,7 +25,7 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
 
   return (
     <div className='card'>
-      <img src='' className='card-img-top' alt='task image' />
+      <img src={imageUrl} className='card-img-top' alt='task image' />
       <div className='card-body'>
         <h5 className='card-title'>{name}</h5>
         <h5 className='card-subtitle'>Type: {taskType}</h5>
@@ -57,10 +55,11 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
 };
 
 RequestCard.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   taskType: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  id: PropTypes.string,
   userTasksPage: PropTypes.bool
 };
 

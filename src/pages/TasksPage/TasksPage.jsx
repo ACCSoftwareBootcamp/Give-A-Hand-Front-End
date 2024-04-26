@@ -8,9 +8,7 @@ const TasksPage = () => {
   const [fetchResponse, setFetchResponse] = useState({});
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchClick, setSearchClick] = useState(false);
   const limit = 3;
-  // let page = 1;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,22 +17,19 @@ const TasksPage = () => {
     fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {
+        // Split data and response from server
         const { docs, ...fetchResponse } = data;
-        console.log(docs);
         setTasks(docs);
+        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
-
-    searchClick && setSearchClick(false);
-  });
+  }, []);
 
   const handleSearchClick = () => {
-    setPage(1);
-    // page = 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=1`)
       .then((res) => res.json())
       .then((data) => {
         const { docs, ...fetchResponse } = data;
@@ -44,13 +39,11 @@ const TasksPage = () => {
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
+    setPage(1);
   };
 
   const handlePageChange = () => {
-    setPage((prevPage) => prevPage + 1);
-    console.log(page);
-    // page += 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page + 1}`)
       .then((res) => res.json())
       .then((data) => {
         const { docs, ...fetchResponse } = data;
@@ -61,6 +54,7 @@ const TasksPage = () => {
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
+    setPage(page + 1);
   };
 
   return (
@@ -82,16 +76,19 @@ const TasksPage = () => {
       {!tasks ? (
         <p>Loading...</p>
       ) : (
-        <div className='tasks-container'>
-          {tasks.map((task) => (
-            <RequestCard
-              key={task._id}
-              id={task._id}
-              name={task.name}
-              description={task.description}
-              taskType={task.taskType}
-            />
-          ))}
+        <div>
+          <div className='tasks-container'>
+            {tasks.map((task) => (
+              <RequestCard
+                key={task._id}
+                id={task._id}
+                name={task.name}
+                imageUrl={task.imageUrl}
+                description={task.description}
+                taskType={task.taskType}
+              />
+            ))}
+          </div>
           {fetchResponse.hasNextPage && (
             <div className='text-center'>
               <button className='btn btn-outline-primary' onClick={handlePageChange}>
