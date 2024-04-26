@@ -15,7 +15,7 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage, imageUrl 
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await request.json();
-      if (data?.message == 'Success') {
+      if (data?.message === 'Success') {
         setAdded(true);
       }
     } catch (error) {
@@ -28,7 +28,7 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage, imageUrl 
       <img src={imageUrl} className='card-img-top' alt='task image' />
       <div className='card-body'>
         <h5 className='card-title'>{name}</h5>
-        <h5 className='card-subtitle'>Type: {taskType}</h5>
+        <h6 className='card-subtitle mb-2 text-muted'>Type: {taskType}</h6>
         <p className='card-text'>{description}</p>
         {added || userTasksPage ? (
           <div className='text-success'>
