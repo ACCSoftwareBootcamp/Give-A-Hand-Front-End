@@ -27,7 +27,7 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
 
   return (
     <div className='card'>
-      <img src='' className='card-img-top' alt='task image' />
+      <img src='placeholder.png' className='card-img-top' alt='task image' />
       <div className='card-body'>
         <h5 className='card-title'>{name}</h5>
         <h5 className='card-subtitle'>Type: {taskType}</h5>
