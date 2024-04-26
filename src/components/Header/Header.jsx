@@ -1,13 +1,14 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import { NavLink } from 'react-router-dom';
+import './Header.scss';
 
 function Header() {
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <div className='container-fluid sticky-top'>
-        <a className='navbar-brand' href='#'>
-          Give-A-Hand
-        </a>
+    <nav className='navbar bg-primary navbar-expand' data-bs-theme='dark'>
+      <div className='container sticky-top'>
+        <span className='navbar-brand fw-bold' href='#'>
+          GiveAHand
+        </span>
         <button
           className='navbar-toggler'
           type='button'
@@ -36,45 +37,18 @@ function Header() {
                 Create Task
               </NavLink>
             </li>
-            <li className='nav-item dropdown'>
-              <a
-                className='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdown'
-                role='button'
-                data-bs-toggle='dropdown'
-                aria-expanded='false'
-              >
-                Dropdown
-              </a>
-              <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                <li>
-                  <a className='dropdown-item' href='#'>
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className='dropdown-item' href='#'>
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className='dropdown-divider' />
-                </li>
-                <li>
-                  <a className='dropdown-item' href='#'>
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+            <NavLink className='nav-link' to='/about'>
+              About Us
+            </NavLink>
             <li className='nav-item'>
-              <a className='nav-link disabled'>Disabled</a>
+              <NavLink className='nav-link' to='/user-tasks'>
+                Volunteers
+              </NavLink>
             </li>
           </ul>
           <div className='authorization'>
             <SignedOut>
-              <SignInButton className='btn btn-outline-success' mode='modal' redirectUrl='/' />
+              <SignInButton className='btn btn-outline-light' mode='modal' />
             </SignedOut>
             <SignedIn>
               <UserButton afterSignOutUrl='/' />

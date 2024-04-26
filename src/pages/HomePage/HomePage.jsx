@@ -1,11 +1,16 @@
-import Cards from '../../components/Cards';
-import '../../App.css';
+import Cards from './Cards/Cards.jsx';
+import '../../App.scss';
+import Banner from './Banner/Banner.jsx';
+import Goal from './Goal/Goal.jsx';
+import CallToAction from './CallToAction/CallToAction.jsx';
 
 const HomePage = () => {
   return (
-    <div className='banner'>
+    <div>
+      <Banner />
       <Cards />
-      HomePage
+      <Goal />
+      <CallToAction />
     </div>
   );
 };

@@ -1,0 +1,38 @@
+.goal-section {
+  position: relative;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 120px 0;
+  }
+
+  .card {
+    width: 350px;
+    opacity: 0.96;
+  }
+
+  .card:first-child {
+    margin-right: 30px;
+  }
+
+  .card-title {
+    margin-bottom: 25px;
+  }
+
+  .card-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-link {
+    margin-top: auto;
+  }
+}
+
+#tsparticles {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}

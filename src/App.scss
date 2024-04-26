@@ -1,0 +1,39 @@
+// required to get $indigo-400 variable
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_variables.scss';
+
+$primary: $indigo-400; // set the $primary variable
+
+// merge with existing $theme-colors map
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    'primary': $primary
+  )
+);
+
+// set changes
+@import 'bootstrap';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.navbar {
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1 0 auto;
+  border: 1px solid #000;
+}
+
+footer {
+  flex-shrink: 0;
+}
