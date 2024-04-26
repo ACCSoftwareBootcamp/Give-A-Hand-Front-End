@@ -9,7 +9,6 @@ function Cards() {
       .then((res) => res.json())
       .then((data) => {
         const { docs } = data;
-        console.log(docs);
         setTasks(docs);
       })
       .catch((error) => {
@@ -26,7 +25,8 @@ function Cards() {
             <div key={task._id} className='card'>
               <img src={task.imageUrl} className='card-img-top' alt='task image' />
               <div className='card-body'>
-                <h5 className='card-title'>{tasks.name}</h5>
+                <h5 className='card-title'>{task.name}</h5>
+                <h5 className='card-subtitle'>Type: {task.taskType}</h5>
                 <p className='card-text'>{task.description}</p>
                 <a href='#' className='btn btn-primary'>
                   Start Task

@@ -25,7 +25,7 @@ const UserTasksPage = () => {
     }
 
     fetchTasks();
-  });
+  }, []);
 
   return (
     <div className='tasks-section container'>

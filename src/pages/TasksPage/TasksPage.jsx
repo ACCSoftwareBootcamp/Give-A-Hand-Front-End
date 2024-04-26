@@ -31,9 +31,7 @@ const TasksPage = () => {
   }, []);
 
   const handleSearchClick = () => {
-    setPage(1);
-    // page = 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=1`)
       .then((res) => res.json())
       .then((data) => {
         const { docs, ...fetchResponse } = data;
@@ -43,23 +41,21 @@ const TasksPage = () => {
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
+    setPage(1);
   };
 
   const handlePageChange = () => {
-    setPage((prevPage) => prevPage + 1);
-    console.log(page);
-    // page += 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
+    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page + 1}`)
       .then((res) => res.json())
       .then((data) => {
         const { docs, ...fetchResponse } = data;
         setTasks([...tasks, ...docs]);
-        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
+    setPage(page + 1);
   };
 
   return (

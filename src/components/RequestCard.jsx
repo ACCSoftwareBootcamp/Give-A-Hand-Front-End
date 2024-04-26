@@ -3,12 +3,11 @@ import { useAuth } from '@clerk/clerk-react';
 import { useState } from 'react';
 
 const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
-  const { getToken, userId } = useAuth();
+  const { getToken } = useAuth();
   const [added, setAdded] = useState(false);
 
   const handleAddClick = async () => {
     const token = await getToken();
-    console.log({ token, userId });
 
     try {
       const request = await fetch(`http://localhost:3000/task/${id}`, {
@@ -16,7 +15,6 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await request.json();
-      console.log(data);
       if (data?.message == 'Success') {
         setAdded(true);
       }
@@ -57,10 +55,10 @@ const RequestCard = ({ id, name, taskType, description, userTasksPage }) => {
 };
 
 RequestCard.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   taskType: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  id: PropTypes.string,
   userTasksPage: PropTypes.bool
 };
 
