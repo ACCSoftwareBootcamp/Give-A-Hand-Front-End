@@ -4,63 +4,48 @@ import { useEffect } from 'react';
 import './TasksPage.scss';
 
 const TasksPage = () => {
-  const [tasks, setTasks] = useState([]);
-  const [fetchResponse, setFetchResponse] = useState({});
+  // stores the response from the fetch request
+  const [fetchResponse, setFetchResponse] = useState({ docs: [] });
+  // stores the current page number
   const [page, setPage] = useState(1);
+  // stores the search term
   const [searchTerm, setSearchTerm] = useState('');
+  // stores whether the search button was clicked
   const [searchClick, setSearchClick] = useState(false);
+  // stores the number of items to display per page
   const limit = 3;
-  // let page = 1;
 
+  // dont allow form to submit if the user hits "Enter"
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  useEffect(() => {
+
+  // define what happens when page loads, search term is updated or page is updated
+  const getData = () => {
     fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
       .then((res) => res.json())
       .then((data) => {
-        const { docs, ...fetchResponse } = data;
-        console.log(docs);
-        setTasks(docs);
-        setFetchResponse(fetchResponse);
-      })
-      .catch((error) => {
-        console.log('Error searching for Request: ', error);
-      });
-
-    searchClick && setSearchClick(false);
-  });
-
-  const handleSearchClick = () => {
-    setPage(1);
-    // page = 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { docs, ...fetchResponse } = data;
-        setTasks(docs);
-        setFetchResponse(fetchResponse);
+        console.log('page is : ', page);
+        setFetchResponse({ ...data, docs: [...fetchResponse.docs, ...data.docs] });
       })
       .catch((error) => {
         console.log('Error searching for Request: ', error);
       });
   };
 
+  // load data upon start or when page or searchClick are updated
+  useEffect(getData, [page, searchClick]);
+
+  // used to bump up the page counter and trigger a getData call
   const handlePageChange = () => {
     setPage((prevPage) => prevPage + 1);
-    console.log(page);
-    // page += 1;
-    fetch(`http://localhost:3000/tasks?searchTerm=${searchTerm}&limit=${limit}&page=${page}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { docs, ...fetchResponse } = data;
-        setTasks([...tasks, ...docs]);
-        console.log(docs);
-        setFetchResponse(fetchResponse);
-      })
-      .catch((error) => {
-        console.log('Error searching for Request: ', error);
-      });
+  };
+
+  // used to trigger a getData call when the search button is clicked
+  const handleSearchClick = () => {
+    setPage(1);
+    setFetchResponse({ docs: [] });
+    setSearchClick((prevSearchClick) => !prevSearchClick);
   };
 
   return (
@@ -79,28 +64,25 @@ const TasksPage = () => {
           Search
         </button>
       </form>
-      {!tasks ? (
-        <p>Loading...</p>
-      ) : (
-        <div className='tasks-container'>
-          {tasks.map((task) => (
+      <div className='tasks-container'>
+        {fetchResponse.docs &&
+          fetchResponse.docs.map((task, i) => (
             <RequestCard
-              key={task._id}
+              key={i}
               id={task._id}
               name={task.name}
               description={task.description}
               taskType={task.taskType}
             />
           ))}
-          {fetchResponse.hasNextPage && (
-            <div className='text-center'>
-              <button className='btn btn-outline-primary' onClick={handlePageChange}>
-                Load More
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+        {fetchResponse.hasNextPage && (
+          <div className='text-center'>
+            <button className='btn btn-outline-primary' onClick={handlePageChange}>
+              Load More
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
