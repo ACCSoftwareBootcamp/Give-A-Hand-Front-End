@@ -7,7 +7,7 @@ const PrivateRoutes = () => {
     return <Outlet />;
   }
 
-  alert('Please login first');
+  // alert('Please login first');
   return <Navigate to='/' />;
 };
 

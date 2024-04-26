@@ -20,6 +20,7 @@ const TasksPage = () => {
         // Split data and response from server
         const { docs, ...fetchResponse } = data;
         setTasks(docs);
+        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {
@@ -47,6 +48,7 @@ const TasksPage = () => {
       .then((data) => {
         const { docs, ...fetchResponse } = data;
         setTasks([...tasks, ...docs]);
+        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {
@@ -81,6 +83,7 @@ const TasksPage = () => {
                 key={task._id}
                 id={task._id}
                 name={task.name}
+                imageUrl={task.imageUrl}
                 description={task.description}
                 taskType={task.taskType}
               />
