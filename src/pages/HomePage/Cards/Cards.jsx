@@ -26,7 +26,7 @@ function Cards() {
               <img src={task.imageUrl} className='card-img-top' alt='task image' />
               <div className='card-body'>
                 <h5 className='card-title'>{task.name}</h5>
-                <h5 className='card-subtitle'>Type: {task.taskType}</h5>
+                <h6 className='card-subtitle mb-2 text-muted'>Type: {task.taskType}</h6>
                 <p className='card-text'>{task.description}</p>
                 <a href='#' className='btn btn-primary'>
                   Start Task

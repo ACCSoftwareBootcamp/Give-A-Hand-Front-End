@@ -1,8 +1,10 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignInButton, useAuth, UserButton } from '@clerk/clerk-react';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
 
 function Header() {
+  const { isSignedIn } = useAuth();
+
   return (
     <nav className='navbar bg-primary navbar-expand' data-bs-theme='dark'>
       <div className='container sticky-top'>
@@ -27,21 +29,26 @@ function Header() {
                 Home
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link' to='/tasks'>
-                Tasks
-              </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link' to='/create-task'>
-                Create Task
-              </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link' to='/user-tasks'>
-                Assignments
-              </NavLink>
-            </li>
+            {isSignedIn && (
+              <>
+                <li className='nav-item'>
+                  <NavLink className='nav-link' to='/tasks'>
+                    Tasks
+                  </NavLink>
+                </li>
+                <li className='nav-item'>
+                  <NavLink className='nav-link' to='/create-task'>
+                    Create Task
+                  </NavLink>
+                </li>
+                <li className='nav-item'>
+                  <NavLink className='nav-link' to='/user-tasks'>
+                    Assignments
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             <li className='nav-item'>
               <NavLink className='nav-link' to='/about-us'>
                 About Us
