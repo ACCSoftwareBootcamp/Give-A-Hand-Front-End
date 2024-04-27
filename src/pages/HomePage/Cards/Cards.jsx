@@ -32,19 +32,15 @@ function Cards() {
                 <p className='card-text'>{task.description}</p>
 
                 <SignedOut>
-                  <SignInButton mode='modal'>
-                    <NavLink className='btn btn-primary' to='/tasks'>
-                      Start Task
-                    </NavLink>
+                  <SignInButton className='btn btn-primary' mode='modal'>
+                    Start Task
                   </SignInButton>
                 </SignedOut>
 
                 <SignedIn>
-                  <button type='button' className='btn btn-primary'>
-                    <NavLink className='nav-link' to='/tasks'>
-                      Start Task
-                    </NavLink>
-                  </button>
+                  <NavLink className='btn btn-primary' to='/tasks'>
+                    Start Task
+                  </NavLink>
                 </SignedIn>
               </div>
             </div>

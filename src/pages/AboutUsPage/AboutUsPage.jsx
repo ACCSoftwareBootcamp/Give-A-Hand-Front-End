@@ -29,7 +29,7 @@ function AboutUsPage() {
 
   return (
     <div className='about-section'>
-      <h2 className='about-title text-center mt-5 mb-5 text-light'>About us</h2>
+      <h2 className='about-title text-center mt-5 mb-5 text-light'>About Us</h2>
       <Particles id='particles-top' options={options} />
 
       <div className='about-content'>
