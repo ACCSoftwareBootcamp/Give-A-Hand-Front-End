@@ -107,8 +107,8 @@ function CreateTaskPage() {
               required
             />
           </div>
-          <div className='mb-3'>
-            <label className='d-block mb-3' htmlFor='image-upload'>
+          <div className='mb-3 d-flex flex-column align-items-start'>
+            <label className='mb-3' htmlFor='image-upload'>
               Upload Image
             </label>
             <input
