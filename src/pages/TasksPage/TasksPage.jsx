@@ -20,7 +20,6 @@ const TasksPage = () => {
         // Split data and response from server
         const { docs, ...fetchResponse } = data;
         setTasks(docs);
-        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {
@@ -48,7 +47,6 @@ const TasksPage = () => {
       .then((data) => {
         const { docs, ...fetchResponse } = data;
         setTasks([...tasks, ...docs]);
-        console.log(docs);
         setFetchResponse(fetchResponse);
       })
       .catch((error) => {

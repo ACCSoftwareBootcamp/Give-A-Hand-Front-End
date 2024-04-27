@@ -1,5 +1,7 @@
 import './Cards.scss';
 import { useEffect, useState } from 'react';
+import { SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
+import { NavLink } from 'react-router-dom';
 
 function Cards() {
   const [tasks, setTasks] = useState([]);
@@ -28,9 +30,18 @@ function Cards() {
                 <h5 className='card-title'>{task.name}</h5>
                 <h6 className='card-subtitle mb-2 text-muted'>Type: {task.taskType}</h6>
                 <p className='card-text'>{task.description}</p>
-                <a href='#' className='btn btn-primary'>
-                  Start Task
-                </a>
+
+                <SignedOut>
+                  <SignInButton className='btn btn-primary' mode='modal'>
+                    Start Task
+                  </SignInButton>
+                </SignedOut>
+
+                <SignedIn>
+                  <NavLink className='btn btn-primary' to='/tasks'>
+                    Start Task
+                  </NavLink>
+                </SignedIn>
               </div>
             </div>
           ))
