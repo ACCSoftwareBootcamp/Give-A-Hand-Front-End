@@ -4,20 +4,18 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 
 const UserTasksPage = () => {
-  const { getToken, userId } = useAuth();
+  const { getToken } = useAuth();
   const [tasks, setTasks] = useState();
 
   useEffect(() => {
     async function fetchTasks() {
       const token = await getToken();
-      console.log({ token, userId });
 
       try {
         const request = await fetch('http://localhost:3000/user-tasks', {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await request.json();
-        console.log(data);
         setTasks(data.results);
       } catch (error) {
         console.log('Error searching for Request: ', error);
